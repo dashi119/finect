@@ -18,5 +18,5 @@ root = ET.fromstring(xml_string)
 for child in root:
     print(child.tag, child.attrib)
 # ADDRESS_valueタグ配下のvalueタグをすべて選択します
-for i in root.findall('./ADDRESS_value/value'):
-    print(i.attrib)
+for i in root.findall('./CstmrCdtTrfInitn/PmtInf/PmtInfId'):
+    print(i.value)
