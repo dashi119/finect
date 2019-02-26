@@ -13,10 +13,12 @@ with urllib.request.urlopen(req) as response:
 # print(xml_string)
 import xml.etree.ElementTree as ET
 
-root = ET.fromstring(xml_string)
+#root = ET.fromstring(xml_string)
+tree = ET.parse('pain001sam.xml')
+root = tree.getroot()
 
 for child in root:
     print(child.tag, child.attrib)
 # ADDRESS_valueタグ配下のvalueタグをすべて選択します
-for i in root.findall('./CstmrCdtTrfInitn/PmtInf/PmtInfId'):
-    print(i.value)
+for i in root.findall('./*'):
+    print(i.tag)
