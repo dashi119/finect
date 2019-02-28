@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.002.001.03">
+	<CstmrPmtStsRpt>
+		<GrpHdr>
+			<MsgId>2019022805976253</MsgId>
+			<CreDtTm>2019-02-28T14:09:00</CreDtTm>
+		</GrpHdr>
+		<OrgnlGrpInfAndSts>
+			<OrgnlMsgId>ABC/100928/CCT001</OrgnlMsgId>
+			<OrgnlMsgNmId>pain.001.001.03</OrgnlMsgNmId>
+			<GrpSts>ACCP</GrpSts>
+			<StsRsnInf>
+				<Rsn>
+					<Prtry>00-0000</Prtry>
+				</Rsn>
+			</StsRsnInf>
+		</OrgnlGrpInfAndSts>
+		<OrgnlPmtInfAndSts>
+			<OrgnlPmtInfId>42S4RRWGYN5GYPA</OrgnlPmtInfId>
+			<TxInfAndSts>
+				<StsId>201902280597625300000001</StsId>
+				<OrgnlInstrId>GDVV123</OrgnlInstrId>
+				<OrgnlEndToEndId>E2E123</OrgnlEndToEndId>
+				<TxSts>ACCP</TxSts>
+				<StsRsnInf>
+					<Rsn>
+						<Prtry>0140000</Prtry>
+					</Rsn>
+				</StsRsnInf>
+				<OrgnlTxRef>
+					<Amt>
+						<InstdAmt Ccy="USD">1.00</InstdAmt>
+					</Amt>
+					<ReqdExctnDt>2019-03-01</ReqdExctnDt>
+					<Dbtr>
+						<Nm>The ABC Corporation</Nm>
+					</Dbtr>
+					<DbtrAcct>
+						<Id>
+							<Othr>
+								<Id>000512311234567</Id>
+							</Othr>
+						</Id>
+					</DbtrAcct>
+					<DbtrAgt>
+						<FinInstnId>
+							<BIC>BOTKJPJT</BIC>
+						</FinInstnId>
+					</DbtrAgt>
+					<CdtrAgt>
+						<FinInstnId>
+							<BIC>SMBCJPJT</BIC>
+						</FinInstnId>
+					</CdtrAgt>
+					<Cdtr>
+						<Nm>DDD Corporation</Nm>
+						<PstlAdr>
+							<Ctry>JP</Ctry>
+						</PstlAdr>
+					</Cdtr>
+					<CdtrAcct>
+						<Id>
+							<Othr>
+								<Id>123456</Id>
+							</Othr>
+						</Id>
+					</CdtrAcct>
+				</OrgnlTxRef>
+			</TxInfAndSts>
+		</OrgnlPmtInfAndSts>
+	</CstmrPmtStsRpt>
+</Document>
