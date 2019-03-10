@@ -1,5 +1,15 @@
 import xml.etree.ElementTree as ET
 import datetime
+import os
+import sys
+# SEND Directory polling
+# User 1900000001SERVERID SEND Directory search
+path = '/home/1900000001SERVERID/sftp-root/SEND/'
+if os.path.isdir(path):
+    pollablelist = os.listdir(path)
+    print(pollablelist)
+# else:
+#    sys.exit()
 xml_path = "pain001sam.xml"             # pain.001 XML File path on local downloaded from SFTP Server SEND dir
 RefList = []
 tree = ET.parse(xml_path)               # Parse pain.001 XML File
