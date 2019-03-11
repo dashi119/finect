@@ -111,16 +111,18 @@ def StsRtn(pain001path):
     # replacestring = replacestring.replace('<?xml version="1.0"?>','<?xml version="1.0" encoding="UTF-8"?>')
     replacestring = replacestring.replace('<Document>','<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.002.001.03">')
     replacestring = '<?xml version="1.0" encoding="UTF-8"?>' + replacestring
-    with open('textpmt2-2.xml','w') as p00202:
+    pain002path = '/home/1900000001SERVERID/sftp-root/RECV/BOTK' + xml_path
+    with open(pain002path,'w') as p00202:
         p00202.write(replacestring)
+        os.remove(xml_path)
     
 
 import os
 import sys
 # SEND Directory polling
 # User 1900000001SERVERID SEND Directory search
-# path = '/home/1900000001SERVERID/sftp-root/SEND/'
-path = './'
+path = '/home/1900000001SERVERID/sftp-root/SEND/'
+#path = './'
 if os.path.isdir(path):
     pollablelist = os.listdir(path)
     print(pollablelist)
