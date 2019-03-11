@@ -1,2 +1,2 @@
 #!/bin/sh
-/home/finect/finect/VirtualBank/BankStub.py
+/home/ec2-user/finect/finect/VirtualBank/BankStub.py
