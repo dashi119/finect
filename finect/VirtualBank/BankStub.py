@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 def StsRtn(pain001path):
     import xml.etree.ElementTree as ET
     import datetime
