@@ -111,7 +111,7 @@ def StsRtn(pain001path):
     # replacestring = replacestring.replace('<?xml version="1.0"?>','<?xml version="1.0" encoding="UTF-8"?>')
     replacestring = replacestring.replace('<Document>','<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.002.001.03">')
     replacestring = '<?xml version="1.0" encoding="UTF-8"?>' + replacestring
-    pain002path = xml_path.replace('/home/1900000001SERVERID/sftp-root/SEND','/home/1900000001SERVERID/sftp-root/RECV/BOTK')
+    pain002path = xml_path.replace('/home/1900000001SERVERID/sftp-root/SEND/','/home/1900000001SERVERID/sftp-root/RECV/BOTK')
     with open(pain002path,'w') as p00202:
         p00202.write(replacestring)
         os.remove(xml_path)
