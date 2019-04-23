@@ -3,7 +3,8 @@
 def StsRtn(pain001path):
     import xml.etree.ElementTree as ET
     import datetime
-#    xml_path = "pain001sam.xml"             # pain.001 XML File path on local downloaded from SFTP Server SEND dir
+#   xml_path = "pain001sam.xml"             # pain.001 XML File path on local downloaded from SFTP Server SEND dir
+#   xml_path = "0836201904091558068201801059.xml"             # pain.001 XML File path on local downloaded from SFTP Server SEND dir
     xml_path = pain001path             # pain.001 XML File path on local downloaded from SFTP Server SEND dir
     RefList = []
     try:
@@ -16,6 +17,55 @@ def StsRtn(pain001path):
     pain001_Xpath = ".//1:CstmrCdtTrfInitn/1:PmtInf" # Search Xpath for pain.001 root 
     pain001flug = root.findall(pain001_Xpath, ns)
     if not pain001flug:
+        # pain.002.001.02 Payment Status Report XML Lv.2 Scheme error XML Output
+        # root Element
+        Document = ET.Element('Document')
+        # Document element is root set
+        tree2 = ET.ElementTree(element=Document)
+        CstmrPmtStsRpt = ET.SubElement(Document, 'CstmrPmtStsRpt')
+        # Add Group Header 
+        GrpHdr = ET.SubElement(CstmrPmtStsRpt, 'GrpHdr')
+        # Add Message Identification
+        MsgId = ET.SubElement(GrpHdr, 'MsgId')
+        now = datetime.datetime.now()
+        timestamp = str(now.year) + str(now.month).zfill(2) + str(now.day).zfill(2) + str(now.hour).zfill(2) + str(now.minute).zfill(2) + str(now.second).zfill(2)
+        MsgId.text = timestamp
+        # Add Creation Date and Time
+        CreDtTm = ET.SubElement(GrpHdr, 'CreDtTm')
+        # CreDtTm.text = datetime.datetime.now().isoformat(timespec='seconds')
+        CreDtTm.text = datetime.datetime.now().isoformat()
+        # Add Original Group Information and Status
+        OrgnlGrpInfAndSts = ET.SubElement(CstmrPmtStsRpt, 'OrgnlGrpInfAndSts')
+        # Add Original Message Identification
+        OrgnlMsgId = ET.SubElement(OrgnlGrpInfAndSts, 'OrgnlMsgId')
+        OrgnlMsgId.text = ' '
+        # Add Original Message Name Identification
+        OrgnlMsgNmId = ET.SubElement(OrgnlGrpInfAndSts, 'OrgnlMsgNmId')
+        OrgnlMsgNmId.text = 'pain.001.001.03'
+        # Add Group Status (4 digits ISO20022 defined code)
+        GrpSts = ET.SubElement(OrgnlGrpInfAndSts, 'GrpSts')
+        GrpSts.text = 'RJCT'
+        # Add Status Reason Information
+        StsRsnInf = ET.SubElement(OrgnlGrpInfAndSts, 'StsRsnInf')
+        # Add Reason
+        Rsn = ET.SubElement(StsRsnInf, 'Rsn')
+        # Add proprietary : Bank defined 7 digits codes
+        Prtry = ET.SubElement(Rsn, 'Prtry')
+        Prtry.text = '10-0001'  # This stub always return 10-0001(XML Scheme error)
+        # pain.002出力確認標準出力
+        root = tree2.getroot()
+        for child in root.findall('.CstmrPmtStsRpt//'):
+            print(child.tag, child.text)
+        tree2.write('textpmt2.xml', encoding='utf-8')
+        with open('textpmt2.xml','r') as p002:
+            replacestring = p002.read()
+        # replacestring = replacestring.replace('<?xml version="1.0"?>','<?xml version="1.0" encoding="UTF-8"?>')
+        replacestring = replacestring.replace('<Document>','<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.002.001.03">')
+        replacestring = '<?xml version="1.0" encoding="UTF-8"?>' + replacestring
+        pain002path = xml_path.replace('/home/1900000001SERVERID/sftp-root/SEND/','/home/1900000001SERVERID/sftp-root/RECV/BOTK')
+        with open(pain002path,'w') as p00202:
+            p00202.write(replacestring)
+            os.remove(xml_path)
         return
     # pain.001 invoicee contact details other get
     Ref_Xpath = ".//1:CstmrCdtTrfInitn/1:PmtInf/1:CdtTrfTxInf/1:RmtInf/1:Strd/1:Invcee/1:CtctDtls/1:Othr" # Search Xpath for pain.001-pain.002 matching reference tag 
